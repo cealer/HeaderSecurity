@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Threading.Tasks;
 
 namespace SecurityHeaders
 {
@@ -61,6 +62,17 @@ namespace SecurityHeaders
             .FrameAncestors(s => s.Self())
             .ImageSources(s => s.Self())
             .ScriptSources(s => s.Self()));
+
+            app.Use(async (context, nextMiddleware) =>
+            {
+                context.Response.OnStarting(() =>
+                {
+                    context.Response.Headers.Add("Feature-Policy", "geolocation 'self'");
+                    context.Response.Headers.Remove("Server");
+                    return Task.FromResult(0);
+                });
+                await nextMiddleware();
+            });
 
             app.UseRouting();
 
