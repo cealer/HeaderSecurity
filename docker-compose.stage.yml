@@ -1,0 +1,17 @@
+﻿version: '3.4'
+
+services:
+  securityheaders:
+    image: cealer/headersecurity:6
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_HTTPS_PORT=44344
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=a05ed8c9-c000-4f77-8f52-9fef247041dc
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/root/.aspnet/https/SecurityHeaders.pfx
+    ports:
+      - "57931:80"
+      - "44344:443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

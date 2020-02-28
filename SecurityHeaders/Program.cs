@@ -20,6 +20,7 @@ namespace SecurityHeaders
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseKestrel(c => c.AddServerHeader = false);
                     webBuilder.UseStartup<Startup>();
                 });
     }
