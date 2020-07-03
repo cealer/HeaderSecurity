@@ -27,7 +27,7 @@ RUN dotnet build "SecurityHeaders.csproj" -c Release -o /app/build
 WORKDIR "/src/UnitTest"
 RUN dotnet build "UnitTest.csproj" -c Release -o /app/build
 
-RUN dotnet test "UnitTest/UnitTest.csproj" --logger "trx;LogFileName=SecurityHeaders.trx" 
+RUN dotnet test "UnitTest.csproj" --logger "trx;LogFileName=SecurityHeaders.trx" 
 
 FROM build AS publish
 RUN dotnet publish "SecurityHeaders.csproj" -c Release -o /app/publish
