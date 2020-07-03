@@ -2,7 +2,7 @@
 
 services:
   securityheaders:
-    image: cealer/headersecurity:7
+    image: cealer/headersecurity:8
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=https://+:443;http://+:80

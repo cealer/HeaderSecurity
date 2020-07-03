@@ -22,6 +22,7 @@ namespace SecurityHeaders
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddTransient<IWeatherForecastServices,WeatherForecastServices>();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -54,6 +55,7 @@ namespace SecurityHeaders
             app.UseReferrerPolicy(opts => opts.NoReferrer());
             app.UseXXssProtection(options => options.EnabledWithBlockMode());
             app.UseXfo(options => options.Deny());
+
             app.UseCsp(opts => opts
             .BlockAllMixedContent()
             .StyleSources(s => s.Self())
